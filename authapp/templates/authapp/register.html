@@ -1,0 +1,25 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+{% block header %}
+<div class="login_header">
+    {% include "mainapp/includes/inc_menu.html" %}
+    <div class="text_catalog">
+        <h3 class="big_catalog">{{ title }}</h3>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+<form class="form-horizontal" action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    {% csrf_token %}
+      {{ register_form.as_p }}
+  </div>
+  <br />
+  <div class="form-group">
+    <div class="col-xs-offset-3 col-xs-9">
+      <input type="submit" class="btn btn-primary" value="Регистрация">
+      <input type="reset" class="btn btn-default" value="Очистить форму">
+    </div>
+  </div>
+</form>
+{% endblock %}

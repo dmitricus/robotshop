@@ -1,0 +1,41 @@
+{% extends "mainapp/base.html" %}
+{% load staticfiles %}
+{% block title %}Контакты{% endblock %}
+{% block header %}
+<div class="contacts_page">
+    {% include "mainapp/includes/inc_menu.html" %}
+    <div class="text_catalog">
+        <h3 class="big_catalog">Свяжитесь с нами</h3>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+<div class="catalog_main"></div>
+             <nav class="breadcrumb">
+                <a class="breadcrumb-item" href="/">Главная</a>
+                <span class="breadcrumb-item active">Контакты</span>
+            </nav>
+            <div class="contacts_page_content">
+
+                <div class="row">
+                    {% for contact in contact_list %}
+                    <div class="col-md-4">
+                        <a href="{{ contact.href }}">
+                        <div class="contact">
+                            <div class="contacts_page_text">
+                                <div class="geo"><img src="{% static 'img/geo.png' %}"></div>
+                                <h3>{{ contact.name }}</h3>
+                                <h4>Phone</h4>
+                                <p>{{ contact.phone }}</p>
+                                <h4>Email:</h4>
+                                <p>{{ contact.email }}</p>
+                                <h4>Address</h4>
+                                <p>{{ contact.address }}</p>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+{% endblock %}

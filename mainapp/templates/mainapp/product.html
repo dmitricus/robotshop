@@ -1,0 +1,38 @@
+{% extends "mainapp/base.html" %}
+{% load staticfiles %}
+{% load my_tags %}
+
+{% block header %}
+<div class="catalog_product">
+{% include "mainapp/includes/inc_menu.html" %}
+    <div class="text_catalog">
+        <h3 class="big_catalog">{% for product in product_list %}{{ product.name }}{% endfor %}</h3>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+
+            <nav class="breadcrumb">
+                <a class="breadcrumb-item" href="{% url 'main' %}">Главная</a>
+                <a class="breadcrumb-item" href="{% url 'catalog:index' %}">Каталог</a>
+                <span class="breadcrumb-item active">{{ product.name }}</span>
+            </nav>
+            {% include "mainapp/includes/inc_catalog_menu.html" %}
+            {% for product in product_list %}
+              <div class="content">
+                <div class="product">
+                    <div class="img_product"><a href="{{ product.image|media_folder_products }}" target="_blank"><img src="{{ product.image|media_folder_products }}" alt="Робот пылесос {{ product.short_desc }}"></a></div>
+                    <div class="quick">
+                        <h2>Робот пылесос {{ product.name }}</h2>
+                        <div class="price"><span>&#8381;</span> {{ product.price }}<span>/шт.</span></div>
+                        <a class="button" href="{% url 'basket:add' product.pk %}">ЗАКАЗАТЬ</a>
+                        <p>
+                          {{ product.description }}
+                        </p>
+       
+                    </div>
+                </div>
+             </div>
+            {% endfor %}
+{% include "mainapp/includes/inc_preview.html" %}
+{% endblock %}

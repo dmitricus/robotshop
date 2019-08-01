@@ -1,0 +1,76 @@
+<!doctype html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        {% block css %}
+            <!-- Normalize CSS -->
+            <link rel="stylesheet" href="{% static 'css/bootstrap/normalize.css' %}" type="text/css">
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" type="text/css">
+            <!-- Main CSS -->
+            <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+        {% endblock %}
+        {% block js %}
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+            <script src="{% static 'js/popper.min.js' %}"></script>
+            <script src="{% static 'js/bootstrap/tether.min.js' %}"></script>
+            <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+            <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+            <script src="{% static 'js/basket_scripts.js' %}"></script>
+        {% endblock %}
+        <title>{{ title|title }}</title>
+    </head>
+    <body>
+        <div class="container">
+                <header class="header clearfix">{% block header %}{% endblock %}</header>
+                <div class="login">
+                    <main>
+                    {% block main %}{% endblock %}
+                    </main>
+                </div>
+            {% block footer %}
+                <footer>
+                    <div class="footer">
+                        <div class="contacts">
+                            <h3>Контакты</h3>
+                            <br>Тел:8 (800) 888 88 88
+                            <br>E-mail: info@robot.ru
+                        </div>
+                        <div class="usefulinf">
+                            <h3>полезная информация</h3>
+                            <ul class="usefulinf_menu_1">
+                                    <li><a href="#">условия продажи</a></li>
+                                    <li><a href="#">обслуживания клиентов</a></li>
+                                    <li><a href="#">доставка</a></li>
+                            </ul>
+                            <ul class="usefulinf_menu_1">
+                                    <li><a href="#">создать аккаунт</a></li>
+                                    <li><a href="#">карьера</a></li>
+                                    <li><a href="#">обмен и возврат</a></li>
+                            </ul>
+                        </div>
+                        <div class="mail">
+                            <h3>давайте оставатся на связи</h3>
+                             <div class="form-group form-icon">
+                                 <p>Подпишитесь, чтобы узнать о наших последних новостях, продукции и специальных предложениях только для абонентов.</p>
+                                <input class="form-control" id="name-user" placeholder="Ваш email адрес">
+
+                                <i class="input-icon"></i>
+                                <a href="#5"><div class="icon-paper-plane"></div></a>
+                             </div>
+                            </div>
+                        <div class="copy">&copy; copyright - robot.ru {% now "Y" %} Все права защищены</div>
+                        <a href="#"><div class="text_footer">правила и условия / политика конфиденциальности</div></a>
+                            <a href="#1"><div class="icon-facebook-with-circle"></div></a>
+                            <a href="#2"><div class="icon-twitter-with-circle"></div></a>
+                            <a href="#3"><div class="icon-google-with-circle"></div></a>
+                            <a href="#4"><div class="icon-pinterest-with-circle"></div></a>
+                    </div>
+                </footer>
+            {% endblock %}
+        </div>
+    </body>
+</html>

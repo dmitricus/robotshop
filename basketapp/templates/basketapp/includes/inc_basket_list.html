@@ -1,0 +1,43 @@
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <table class="basket-table table">
+              <thead>
+
+              </thead>
+              <tbody>
+              {% for basket_item in basket %}
+              {% with product=basket_item.product %}
+                <tr>
+                    <th scope="row"><a href=""><img src="/media/{{ product.image }}" alt="Робот пылесос {{ product.short_desc }}"></a></th>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }} <span>&#8381;</span></td>
+                    <td><input type="number" class="form-control" name="{{ basket_item.pk }}" min="0" value="{{ basket_item.quantity }}"></td>
+                    <td class="sum">{{ basket_item.product_cost }} <span>&#8381;</span></td>
+                    <td>
+                        <button class="btn btn-round">
+                            <a href="{% url 'basket:remove' basket_item.pk %}" class="">
+                            удалить
+                            </a>
+                        </button>
+                    </td>
+                </tr>
+              {% endwith %}
+              {% endfor %}
+                <tr class="basket-button">
+                    <th scope="row">Итого</th>
+                    <td class="sum" colspan="4">
+                        {% if basket %}
+                        <div class="basket_summary">
+                        В корзине {{ basket.0.total_quantity }} товаров общей стоимостью
+                        {{ basket.0.total_cost }} <span>&#8381;</span>
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td><a class="button" href="#">ОФОРМИТЬ ЗАКАЗ</a></td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+        </div>
+</div>

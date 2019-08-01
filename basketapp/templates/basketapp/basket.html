@@ -1,0 +1,27 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+{% block header %}
+<div class="login_header">
+    {% include "mainapp/includes/inc_menu.html" %}
+    <div class="text_catalog">
+        <h3 class="big_catalog text-center head">
+            Ваша корзина,
+            {% if user.first_name %}
+                {{ user.first_name|title}}
+            {% else %}
+                Пользователь
+            {% endif %}
+        </h3>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+    <div class="basket_list">
+        {% include 'basketapp/includes/inc_basket_list.html' %}
+    </div>
+    <button class="btn btn-round">
+        <a href="{% url 'main' %}">
+            на главную
+        </a>
+    </button>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+{% block header %}
+<div class="login_header">
+    {% include "mainapp/includes/inc_menu.html" %}
+    <div class="text_catalog">
+        <h3 class="big_catalog">{{ title }}</h3>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+                    {% csrf_token %}
+                    {% if next %}
+                        <input type="hidden" name="next" value="{{ next }}">
+                    {% endif %}
+                    {{ login_form.as_p }}
+                    <br>
+                    <input class="form-control" type="submit" value="войти">
+                </form>
+                    <a href="{% url 'auth:register' %}" class="btn btn-primary form-control">
+                    зарегистрироваться
+                    </a>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+{% endblock %}

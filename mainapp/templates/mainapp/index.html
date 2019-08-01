@@ -1,0 +1,101 @@
+{% extends "mainapp/base.html" %}
+{% load staticfiles %}
+{% load my_tags %}
+
+{% block header %}
+{% include "mainapp/includes/inc_menu.html" %}
+<div class="top_slider">
+    {% include "mainapp/includes/inc_top_slider.html" %}
+</div>
+{% endblock %}
+{% block main %}
+            <nav class="breadcrumb">
+                <span class="breadcrumb-item active">Главная</span>
+            </nav>
+            <div class="preview">
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="preview_menu">
+                                <li><a href="{% url 'catalog:index' %}" class="active">Подробнее</a></li>
+                                <li><a href="#">Новинки</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4"><a href="{% url 'catalog:index' %}" class="all">Посмотреть все</a></div>
+                </div>
+                <div class="row">
+                    {% for preview in preview_list %}
+                    <div class="col-md-3">
+                        <a href="/catalog/product/{{ preview.id }}/">
+                        <div class="preview_text">
+                            <div class="preview_circle"></div>
+                            <h3>{{ preview.name }}</h3>
+                            <p>{{ preview.shot_desc }}</p>
+                        </div>
+                        <img src="{{ preview.image|media_folder_products }}" alt="Робот пылесос {{ preview.short_desc }}">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="promo">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="promo_text">
+                            <h2>эксклюзив</h2>
+                            <h3>Braava jet</h3>
+                            <p>моющий робот для кухни, ванной комнаты и прочих помещений, не превышающих по площади 20-25 квадратных метров.</p>
+                            <a class="button" href="/catalog/product/6/">ЗАКАЗАТЬ</a>
+                        </div>
+                        <img src="{% static 'img/braava_jet.jpg' %}" alt="Робот пылесос Roomba 960"></div>
+                    <div class="col-md-6">
+                        <div class="promo_text">
+                            <h2>эксклюзив</h2>
+                            <h3>Braava 390t</h3>
+                            <p>Braava плюс турбо-зарядная база. Робот для деликатной сухой и влажной уборки полов. <br>Был разработан специально для ежедневного ухода за полами с твердым покрытием</p>
+                            <a class="button" href="/catalog/product/7/">ЗАКАЗАТЬ</a>
+                        </div>
+                        <img src="{% static 'img/braava_390t.jpg' %}" alt="Робот пылесос Roomba 960"></div>
+                </div>
+            </div>
+            {% include "mainapp/includes/inc_preview.html" %}
+            {% include "mainapp/includes/inc_main_slider.html" %}
+            <div class="main_exclusive">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="main_exclusive_text">
+                            <h2>Горячее предложение</h2>
+                            <h3>{{ hot_product.name }} </h3>
+                            <p>{{ hot_product.name }} от&nbsp;компании IRobot&nbsp;&mdash; это незаменимый помощник в&nbsp;уборке квартиры без лишних хлопот и&nbsp;траты вашего времени.</p>
+                            <p>{{ hot_product.price }} <span>&#8381;</span></p>
+                            <a class="button" href="{% url 'basket:add' hot_product.pk %}">ЗАКАЗАТЬ</a>
+                        </div>
+                        <img src="{% static 'img/product-1-lg.png' %}" alt="Робот пылесос Roomba 960">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            {% for same_product in same_products %}
+                            <div class="col-md-6">
+                                <a href="{% url 'catalog:product' same_product.pk %}"><img src="{{ same_product.image|media_folder_products }}" alt="Робот пылесос {{ same_product.short_desc }}"></a>
+                                <div class="preview_item_link"><a href="{% url 'catalog:product' same_product.pk %}"></a></div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main_back">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main_back_text">
+                                <h2>мобильное приложение</h2>
+                                <h3>управляй. своим.</h3>
+                                <h3>питомцем.</h3>
+                                <p> <br> Приложение доступно на iOS и Android</p>
+                                <a href="#"><img src="{% static 'img/app-store.png' %}" alt="app store"></a>
+                                <a href="#"><img src="{% static 'img/google-play.png' %}" alt="google play"></a>
+                            </div>
+                            <img src="{% static 'img/back-img.png' %}" alt="Робот пылесос Roomba 960">
+                        </div>
+                    </div>
+            </div>
+{% endblock %}

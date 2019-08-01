@@ -1,0 +1,50 @@
+{% extends "mainapp/base.html" %}
+{% load staticfiles %}
+{% block header %}
+<div class="catalog">
+    {% include "mainapp/includes/inc_menu.html" %}
+    <div class="text_catalog">
+        <h3 class="big_catalog">Ассортимент нашей продукции</h3>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+<div class="catalog_main"></div>
+             <nav class="breadcrumb">
+                <a class="breadcrumb-item" href="{% url 'main' %}">Главная</a>
+                <span class="breadcrumb-item active">Каталог</span>
+            </nav>
+            {% include "mainapp/includes/inc_catalog_menu.html" %}
+            <div class="catalog_all">
+
+                {% include "mainapp/includes/inc_paginator.html" %}
+                <div class="row">
+                    {% for product in products %}
+                        <div class="col-md-4">
+                            <a href="{% url 'catalog:product' product.pk %}"><img src="/media/{{ product.image }}" alt="Робот пылесос {{ product.short_desc }}"></a>
+                            <div class="preview_item_link"><a href="{% url 'catalog:product' product.pk %}"></a></div>
+                        </div>
+                    {% endfor %}
+                </div>
+                </div>
+                <div class="promo">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="promo_text">
+                                <h2>эксклюзив</h2>
+                                <h3>Braava jet</h3>
+                                <p>моющий робот для кухни, ванной комнаты и прочих помещений, не превышающих по площади 20-25 квадратных метров.</p>
+                                <a class="button" href="/catalog/product/6/">ЗАКАЗАТЬ</a>
+                            </div>
+                            <img src="{% static 'img/braava_jet.jpg' %}" alt="Робот пылесос Roomba 960"></div>
+                        <div class="col-md-6">
+                            <div class="promo_text">
+                                <h2>эксклюзив</h2>
+                                <h3>Braava 390t</h3>
+                                <p>Braava плюс турбо-зарядная база. Робот для деликатной сухой и влажной уборки полов. <br>Был разработан специально для ежедневного ухода за полами с твердым покрытием</p>
+                                <a class="button" href="/catalog/product/7/">ЗАКАЗАТЬ</a>
+                            </div>
+                            <img src="{% static 'img/braava_390t.jpg' %}" alt="Робот пылесос Roomba 960"></div>
+                    </div>
+                </div>
+{% endblock %}

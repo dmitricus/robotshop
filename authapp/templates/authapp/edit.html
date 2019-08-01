@@ -1,0 +1,78 @@
+{% extends 'authapp/base.html' %}
+{% load staticfiles %}
+{% block header %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#myTab li:eq(0) a").tab('show');
+});
+</script>
+<div class="login_header">
+    {% include "mainapp/includes/inc_menu.html" %}
+    <div class="text_catalog">
+        <h3 class="big_catalog">{{ title }}</h3>
+    </div>
+</div>
+{% endblock %}
+{% block main %}
+<div class="row edit" id="real-estates-detail">
+  <div class="col-lg-4 col-md-4 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <header class="panel-title">
+          <div class="text-center">
+            <strong>Пользователь сайта</strong>
+          </div>
+        </header>
+      </div>
+      <div class="panel-body">
+        <div class="text-center" id="author">
+          <img src="/media/{{ user.avatar }}">
+          <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+        </div>
+        <h4>История профиля</h4>
+            <table class="table table-th-block">
+              <tbody>
+                <tr>
+                  <td class="active">Зарегистрирован:</td>
+                  <td>{{ user.date_joined }}</td>
+                </tr>
+                <tr>
+                  <td class="active">Последняя авторизация:</td>
+                  <td>{{ user.last_login }}</td>
+                </tr>
+                <tr>
+                  <td class="active">Страна:</td>
+                  <td>{{ user.country }}</td>
+                </tr>
+                <tr>
+                  <td class="active">Полных лет:</td>
+                  <td>{{ user.age }}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-xs-12">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="tab-content">
+          <h4>Редактировать информацию о пользователе</h4>
+          <hr>
+            <p></p>
+            <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ edit_form.as_p }}
+                    <input class="form-control" type="submit" value="сохранить">
+                </form>
+                <button class="btn btn-round form-control last">
+                    <a href="{% url 'main' %}" class="">
+                    на главную
+                    </a>
+                </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

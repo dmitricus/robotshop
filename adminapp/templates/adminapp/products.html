@@ -1,0 +1,8 @@
+{% extends 'adminapp/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="products_list">
+        {% include 'adminapp/includes/inc_product_quantity.html' %}
+        {% include "adminapp/includes/inc_paginator.html" %}
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load my_tags %}
+<button class="new_product">
+    <a class="btn btn-dark" href="{% url 'admin:product_create' category.pk %}">
+        новый продукт
+    </a>
+</button>
+<table class="table">
+            <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Наименование</th>
+                  <th scope="col">Цена</th>
+                  <th scope="col">Количество</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+            </thead>
+        {% for object in object_list %}
+            <div class="product_record">
+                <tr class="{% if not object.is_active %}not_active{% endif %}"><td><img src="{{ object.image|media_folder_products }}" alt="{{ object.name }}"></td>
+                    <td>{{ object.name|title }}</td>
+                    <td>{{ object.price }} руб</td>
+                    <td><input type="number" class="form-control" id="{{ category.pk }}" name="{{ object.pk }}" min="0" value="{{ object.quantity }}"></td>
+                    <td>{{ object.short_desc|title }}</td>
+                    <td>
+                        <a class="btn btn-dark" href="{% url 'admin:product_read' object.pk %}">
+                            подробнее
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-dark" href="{% url 'admin:product_update' object.pk %}">
+                            редактировать
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-dark" href="{% url 'admin:product_delete' object.pk %}">
+                            удалить
+                        </a>
+                    </td>
+                </tr>
+            </div>
+        {% endfor %}
+</table>
